@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EventDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EventDBModelStoreContainer">
+    <EntitySet Name="BillSettlementmaster" EntityType="EventDBModel.Store.BillSettlementmaster" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CreditAmountDetail" EntityType="EventDBModel.Store.CreditAmountDetail" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EventCustomer" EntityType="EventDBModel.Store.EventCustomer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EventEntryMaster" EntityType="EventDBModel.Store.EventEntryMaster" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EventMaster" EntityType="EventDBModel.Store.EventMaster" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserMaster" EntityType="EventDBModel.Store.UserMaster" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserTypeMaster" EntityType="EventDBModel.Store.UserTypeMaster" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_CreditAmountDetail_CreditAmountDetail" Association="EventDBModel.Store.FK_CreditAmountDetail_CreditAmountDetail">
+      <End Role="UserMaster" EntitySet="UserMaster" />
+      <End Role="CreditAmountDetail" EntitySet="CreditAmountDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CreditAmountDetail_UserMaster" Association="EventDBModel.Store.FK_CreditAmountDetail_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMaster" />
+      <End Role="CreditAmountDetail" EntitySet="CreditAmountDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EventCustomer_UserMaster" Association="EventDBModel.Store.FK_EventCustomer_UserMaster">
+      <End Role="UserMaster" EntitySet="UserMaster" />
+      <End Role="EventCustomer" EntitySet="EventCustomer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EventEntryMaster_EventEntryMaster" Association="EventDBModel.Store.FK_EventEntryMaster_EventEntryMaster">
+      <End Role="EventMaster" EntitySet="EventMaster" />
+      <End Role="EventEntryMaster" EntitySet="EventEntryMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserMaster_UserTypeMaster" Association="EventDBModel.Store.FK_UserMaster_UserTypeMaster">
+      <End Role="UserTypeMaster" EntitySet="UserTypeMaster" />
+      <End Role="UserMaster" EntitySet="UserMaster" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BillSettlementmaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Entrydate" Type="datetime" />
+    <Property Name="Creditamount" Type="decimal" Scale="2" />
+    <Property Name="Paidamount" Type="decimal" Scale="2" />
+    <Property Name="Paidby" Type="int" />
+    <Property Name="Creditedfrom" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="CreditAmountDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="evententryid" Type="bigint" />
+    <Property Name="Creditedfrom" Type="int" />
+    <Property Name="Creditedto" Type="int" />
+    <Property Name="Creditamount" Type="decimal" Scale="2" />
+    <Property Name="entrydate" Type="datetime" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="EventCustomer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Evententryid" Type="bigint" />
+    <Property Name="Eventcustomerid" Type="int" />
+    <Property Name="Paidamount" Type="decimal" Scale="2" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="EventEntryMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Eventid" Type="bigint" />
+    <Property Name="Eventdate" Type="datetime" />
+    <Property Name="Location" Type="nvarchar" MaxLength="50" />
+    <Property Name="TotalAmount" Type="decimal" Scale="2" />
+    <Property Name="Createddate" Type="datetime" />
+    <Property Name="Createdby" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="EventMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Eventname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Createddate" Type="datetime" />
+    <Property Name="Createdby" Type="int" />
+    <Property Name="Updatedate" Type="datetime" />
+    <Property Name="Updatedby" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="UserMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Fullname" Type="nvarchar" MaxLength="80" />
+    <Property Name="Createddate" Type="datetime" />
+    <Property Name="Createdby" Type="int" />
+    <Property Name="Updateddate" Type="datetime" />
+    <Property Name="Updatedby" Type="int" />
+    <Property Name="Usertypeid" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="UserTypeMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Usertype" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_CreditAmountDetail_CreditAmountDetail">
+    <End Role="UserMaster" Type="EventDBModel.Store.UserMaster" Multiplicity="0..1" />
+    <End Role="CreditAmountDetail" Type="EventDBModel.Store.CreditAmountDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CreditAmountDetail">
+        <PropertyRef Name="Creditedfrom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CreditAmountDetail_UserMaster">
+    <End Role="UserMaster" Type="EventDBModel.Store.UserMaster" Multiplicity="0..1" />
+    <End Role="CreditAmountDetail" Type="EventDBModel.Store.CreditAmountDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CreditAmountDetail">
+        <PropertyRef Name="Creditedto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EventCustomer_UserMaster">
+    <End Role="UserMaster" Type="EventDBModel.Store.UserMaster" Multiplicity="0..1" />
+    <End Role="EventCustomer" Type="EventDBModel.Store.EventCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventCustomer">
+        <PropertyRef Name="Eventcustomerid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EventEntryMaster_EventEntryMaster">
+    <End Role="EventMaster" Type="EventDBModel.Store.EventMaster" Multiplicity="0..1" />
+    <End Role="EventEntryMaster" Type="EventDBModel.Store.EventEntryMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventEntryMaster">
+        <PropertyRef Name="Eventid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserMaster_UserTypeMaster">
+    <End Role="UserTypeMaster" Type="EventDBModel.Store.UserTypeMaster" Multiplicity="0..1" />
+    <End Role="UserMaster" Type="EventDBModel.Store.UserMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserTypeMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserMaster">
+        <PropertyRef Name="Usertypeid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

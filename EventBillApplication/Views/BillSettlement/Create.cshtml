@@ -1,0 +1,183 @@
+﻿@model EventBillApplication.Models.Billsettlemententity
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutEvent.cshtml";
+}
+
+@*<h2>Create Bill settlement</h2>*@
+<link type="text/css" rel="stylesheet" href="~/Content/vendors/jasny-bootstrap/css/jasny-bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="~/Content/vendors/datepicker/css/bootstrap-datepicker.min.css" />
+<link type="text/css" rel="stylesheet" href="~/Content/vendors/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+<header class="head">
+    <div class="main-bar row">
+        <div class="col-sm-5 col-lg-6 skin_txt">
+            <h4 class="nav_top_align">
+                <i class="fa fa-pencil"></i>
+                New Bill settlement Entry
+            </h4>
+        </div>
+        <div class="col-sm-7 col-lg-6">
+            <ol class="breadcrumb float-xs-right nav_breadcrumb_top_align">
+                <li class="breadcrumb-item">
+                    <a href="index.html">
+                        <i class="fa fa-home" data-pack="default" data-tags=""></i> Dashboard
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#">Bill settlement</a>
+                </li>
+                <li class="active breadcrumb-item"> New Bill settlement Entry</li>
+            </ol>
+        </div>
+    </div>
+</header>
+
+<div class="outer">
+    <div class="inner bg-container forms">
+        <div class="row">
+
+            <div class="col-xl-12">
+                <div class="card m-t-10">
+                    <div class="card-header bg-white">
+                        New Bill settlement Entry
+                    </div>
+                    <div class="card-block">
+                       @using (Html.BeginForm("Create", "BillSettlement", null, FormMethod.Post, new { @class = "form-horizontal form-simple" }))
+                       {
+                        @Html.AntiForgeryToken()
+                            <fieldset>
+
+                               <div class="form-group row m-t-35">
+                                     <div class="col-lg-3 col-xl-2 text-lg-right">
+                                        <label for="name4" class=" form-control-label">Entry date *</label>
+                                    </div>
+                                    <div class="col-lg-8 col-xl-4">
+                                      <div class="input-group">
+                                     <input type="text" class="form-control" placeholder="dd/mm/yyyy" data-date-format="dd/mm/yyyy" id="entrydate" name="entrydate">
+                                      <span class="input-group-addon add-on">
+                                       <i class="fa fa-calendar"></i>
+                                      </span>
+                                      </div>
+                                   
+                                     </div>
+                                 </div>
+
+                                <div class="form-group row m-t-35">
+                                    <div class="col-lg-3 col-xl-2 text-lg-right">
+                                        <label for="name4" class=" form-control-label">Select  </label>
+                                    </div>
+                                    <div class="col-lg-8 col-xl-4">
+                                       
+
+
+                                             @Html.DropDownList("Creditedfrom", (IEnumerable<SelectListItem>)ViewBag.userlist,"Select", new { @class = "form-control chzn-select", @data_placeholder = "Select",@onchange="getcreditamt()"})
+                                            @Html.ValidationMessage("Creditedfrom", new { @class = "text-danger" })
+                                            <span id="useridmsg" class="text-danger"></span>
+                                         
+                                    </div>
+                                  
+                                </div>
+
+                                <div class="form-group row m-t-35">
+                                       <div class="col-lg-3 col-xl-2 text-lg-right">
+                                        <label for="name4" class=" form-control-label"> Credit Balance *</label>
+                                    </div>
+                                    <div class="col-lg-8 col-xl-4">
+                                       
+
+
+                                            @Html.TextBox("Creditamount", "", new { @class = "form-control", @placeholder = "" })
+                                            @Html.ValidationMessage("Creditamount", new { @class = "text-danger" })
+                                         
+                                    </div>
+                                
+                                    </div>
+
+                                 <div class="form-group row m-t-35">
+                                       <div class="col-lg-3 col-xl-2 text-lg-right">
+                                        <label for="name4" class=" form-control-label">Paid Amount</label>
+                                    </div>
+                                    <div class="col-lg-8 col-xl-4">
+                                      
+
+                                           
+                                          @Html.TextBox("Paidamount","", new { @class = "form-control", @placeholder = "" })
+                                            @Html.ValidationMessage("Paidamount", new { @class = "text-danger" })
+                                             <span id="PaidAmountmsg" class="text-danger"></span>
+                                        
+                                    </div>
+                                
+                                     </div>
+
+                                  
+
+                                    <div class="form-group row">
+                                        <div class="col-lg-9 push-xl-2 push-lg-3">
+
+                                            <input type="submit" class="btn btn-primary layout_btn_prevent" onclick="return isvalidate()" value="Save" />
+                                            <input type="button" class="btn btn-warning layout_btn_prevent" onclick="location.href='@Url.Action("Index", "User")'" value="Cancel" />
+
+                                        </div>
+                                    </div>
+
+                                
+                </fieldset>
+                       }
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/vendors/datepicker/js/bootstrap-datepicker.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/vendors/datetimepicker/js/DateTimePicker.min.js")"></script>
+<script>
+    $('#entrydate').datepicker({
+        todayHighlight: true,
+        autoclose: true
+    });
+
+    function isvalidate()
+    {
+        var valid=true;
+
+        var balance=$('#Creditamount').val();
+        if(parseInt(balance)<=0)
+        {
+            alert("Balance must be greater than 0");
+            valid=false;
+        }
+
+
+        return valid;
+
+    }
+
+
+    function getcreditamt()
+    {
+        var credituserid=$('#Creditedfrom').val();
+        var param={'creditbyid':credituserid};
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("getBalance", "BillSettlement")',
+                data: JSON.stringify(param),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (result) {
+            
+                    $('#Creditamount').val(result);
+                },
+                failure: function (response) {
+                    alert(response.d);
+                }
+        });
+
+
+    }
+
+  </script>

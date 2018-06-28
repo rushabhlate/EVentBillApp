@@ -1,0 +1,560 @@
+﻿@using EventBillApplication.Helper
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+
+
+<!-- Mirrored from dev.lorvent.com/admire/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Dec 2016 12:42:00 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | Admire</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="img/logo1.ico" />
+
+    <!--global styles-->
+    <link type="text/css" rel="stylesheet" href="~/Content/css/components.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/css/custom.css" />
+    <!-- end of global styles-->
+    <!--chart styles-->
+    @*<link type="text/css" rel="stylesheet" href="~/Content/vendors/c3/css/c3.min.css" />
+        <link type="text/css" rel="stylesheet" href="~/Content/vendors/toastr/css/toastr.min.css" />
+        <link type="text/css" rel="stylesheet" href="~/Content/vendors/switchery/css/switchery.min.css" />
+        <link type="text/css" rel="stylesheet" href="~/Content/css/pages/new_dashboard.css" />*@
+    <!-- end of chart styles-->
+    <!--form elements styles-->
+    @*<link type="text/css" rel="stylesheet" href="~/Content/vendors/inputlimiter/css/jquery.inputlimiter.css" />
+        <link type="text/css" rel="stylesheet" href="~/Content/vendors/chosen/css/chosen.css" />
+
+        <link type="text/css" rel="stylesheet" href="~/Content/vendors/jquery-tagsinput/css/jquery.tagsinput.css" />
+        <link type="text/css" rel="stylesheet" href="~/Content/vendors/daterangepicker/css/daterangepicker.css" />
+        <link type="text/css" rel="stylesheet" href="~/Content/vendors/datepicker/css/bootstrap-datepicker.min.css" />
+        <link type="text/css" rel="stylesheet" href="~/Content/vendors/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+        <link type="text/css" rel="stylesheet" href="~/Content/vendors/bootstrap-switch/css/bootstrap-switch.min.css" />
+        <link type="text/css" rel="stylesheet" href="~/Content/vendors/jasny-bootstrap/css/jasny-bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="~/Content/vendors/fileinput/css/fileinput.min.css" />*@
+    <!-- end of form elements styles-->
+    <!--sweet alert css-->
+    <link type="text/css" rel="stylesheet" href="~/Content/vendors/sweetalert/css/sweetalert2.min.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/pages/sweet_alert.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/css/pages/form_layouts.css">
+    <!--End of sweet alert css-->
+    <!--datatable css-->
+    <link type="text/css" rel="stylesheet" href="~/Content/vendors/select2/css/select2.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/vendors/datatables/css/scroller.bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/vendors/datatables/css/dataTables.bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/vendors/datatables/css/colReorder.bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/css/pages/dataTables.bootstrap.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <!-- end of datatable styles -->
+    <!--Page level styles-->
+    <link type="text/css" rel="stylesheet" href="~/Content/css/pages/tables.css" />
+
+
+    <link type="text/css" rel="stylesheet" href="#" id="skin_change" />
+
+</head>
+
+<body class="body">
+    <div class="preloader" style=" position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100000;
+  backface-visibility: hidden;
+  background: #ffffff;">
+        <div class="preloader_img" style="width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 48%;
+  top: 48%;
+  background-position: center;
+z-index: 999999">
+            <img src="~/Content/img/loader.gif" style=" width: 40px;" alt="loading...">
+        </div>
+    </div>
+    <div class="bg-dark" id="wrap">
+        <div id="top">
+            <!-- .navbar -->
+            <nav class="navbar navbar-static-top">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-xs-center" href="@Url.Action("Index","Dashboard")">
+                        <h4 class="text-white"><img src="Content/img/logow.png" class="admin_img" alt="logo"></h4>
+                    </a>
+                    <div class="menu">
+                        <span class="toggle-left" id="menu-toggle">
+                            <i class="fa fa-bars text-white"></i>
+                        </span>
+                    </div>
+
+                    <!-- Toggle Button -->
+                    <div class="text-xs-right xs_menu">
+                        <button class="navbar-toggler hidden-xs-up" type="button" data-toggle="collapse"
+                                data-target="#nav-content">
+                            ☰
+                        </button>
+                    </div>
+                    <!-- Nav Content -->
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="topnav dropdown-menu-right float-xs-right">
+
+                        <div class="btn-group">
+                            <a class="btn btn-default btn-sm messages toggle-right" id="right-toggle">
+                                &nbsp;
+                                <i class="fa fa-cog text-white"></i>
+                                &nbsp;
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <div class="user-settings no-bg">
+                                <button type="button" class="btn btn-default no-bg micheal_btn" data-toggle="dropdown">
+                                    <img src="Content/img/admin.jpg" class="admin_img2 rounded-circle avatar-img" alt="avatar">
+                                    <strong>@Helper.CurrentLoggedUser.Username</strong>
+                                    <span class="fa fa-sort-down white_bg"></span>
+                                </button>
+                                <div class="dropdown-menu admire_admin">
+                                    <a class="dropdown-item title" href="#">
+                                       @*@Helper.CurrentLoggedUser.UserTypeMasterEntity.UserType*@
+                                    </a>
+                                    <a class="dropdown-item" href="edit_user.html">
+                                        <i class="fa fa-cogs"></i>
+                                        Account Settings
+                                    </a>
+                                  
+                               
+                                    <a class="dropdown-item" href="@Url.Action("Signout", "Login")">
+                                        <i class="fa fa-sign-out"></i>
+                                        Log Out
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse navbar-toggleable-sm col-xl-6 col-lg-6 hidden-md-down float-xl-right  top_menu"
+                         id="nav-content">
+                        <ul class="nav navbar-nav top_menubar"></ul>
+                    </div>
+                </div>
+
+                <!-- /.container-fluid -->
+            </nav>
+            <!-- /.navbar -->
+            <!-- /.head -->
+        </div>
+        <!-- /#top -->
+        <div class="wrapper">
+            <div id="left">
+                <div class="media user-media bg-dark dker">
+                    <div class="user-media-toggleHover">
+                        <span class="fa fa-user"></span>
+                    </div>
+                    <div class="user-wrapper bg-dark">
+                        <a class="user-link" href="#">
+                            <img class="media-object img-thumbnail user-img rounded-circle admin_img3" alt="User Picture"
+                                 src="Content/img/admin.jpg">
+                            <p class="text-white user-info">Welcome @Helper.CurrentLoggedUser.Username</p>
+                        </a>
+                        <div class="search_bar col-lg-12">
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- #menu -->
+                <ul id="menu" class="bg-blue dker">
+                  
+                    <li class="active">
+                        <a href="@Url.Action("Index", "Dashboard")">
+                            <i class="fa fa-home"></i>
+                            <span class="link-title">&nbsp;Dashboard</span>
+
+                        </a>
+                    </li>
+
+                   @* @if (@Helper.CurrentLoggedUser.ID == 1 || @Helper.CurrentLoggedUser.ID == 2)
+                    { 
+                    *@
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-th"></i>
+                            <span class="link-title">&nbsp; Master</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul>
+                           
+                           
+                            
+                            <li>
+                                
+                                @Html.ActionLink("Event List", "Index", "Event")
+
+                            </li>
+                            
+                       @*   @if(Helper.CurrentLoggedUser.Usertypeid==1)
+                          {
+                            *@
+                            <li>
+
+                                @Html.ActionLink("UserList", "Index", "User")
+
+                            </li>
+                         @* }*@
+                            </ul>
+                    </li>
+                   
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-th"></i>
+                            <span class="link-title">&nbsp; Transaction</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul>
+                            <li>
+
+                                @Html.ActionLink("Event Entry List", "Index", "EventEntry")
+                                
+                            </li>
+                            <li>
+
+                                @Html.ActionLink("Bill Settlement List", "Index", "BillSettlement")
+                                
+                            </li>
+                            @*<li>
+                                @Html.ActionLink("Credit Statement", "CreditstatementReport", "EventEntry")
+                            </li>*@
+                           
+                           @* <li>
+                                <a href="javascript:;">
+                                    &nbsp;Bank Transaction
+                                    <span class="fa arrow"></span>
+                                </a>
+                              
+                                <ul class="sub-menu sub-submenu collapse" aria-expanded="false" style="">
+                                    <li>
+                                        
+                                         
+                                      <a href="@Url.Action("Create", "BankTransaction", new { tran_type = "Deposite" })">Deposit</a>
+                                       
+                                    </li>
+                                    <li>
+                                       
+                                            
+                                        <a href="@Url.Action("Create", "BankTransaction", new { tran_type = "Withdrawl" })">Withdrawl</a>
+                                     
+                                    </li>
+                                 </ul>
+                            </li>*@
+                        </ul>
+                     </li>
+                     <li>
+                         @Html.ActionLink("Sign out", "Signout", "Login")
+                    </li>
+
+                    @*<li>
+                        <a href="#">
+                            <i class="fa fa-th"></i>
+                            <span class="link-title">&nbsp; Auction</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul>
+                            <li>
+
+                                @Html.ActionLink("AuctionDate", "Index", "Auctiondate")
+
+                            </li>
+                            <li>
+
+                                @Html.ActionLink("Holiday", "Index", "Holiday")
+
+                            </li>
+                            <li>
+
+                                @Html.ActionLink("Weekly Off", "Index", "WeeklyOff")
+
+                            </li>
+                            <li>
+
+                                @Html.ActionLink("Auction ENtry", "Create", "AuctionBidEntry")
+
+                            </li>
+                        </ul>
+                    </li>*@
+   @* <li>
+          <a href="#">
+            <i class="fa fa-th"></i>
+            <span class="link-title">&nbsp; Report</span>
+            <span class="fa arrow"></span>
+          </a>
+         <ul>
+            <li>
+
+                @Html.ActionLink("Subscriber Report", "SubscriberReport", "Report")
+
+            </li>
+            <li>
+
+                @Html.ActionLink("Subscriber Login Report", "SubscriberLoginListReport", "Report")
+
+            </li>
+             <li>
+
+                 @Html.ActionLink("Payment Report", "PaymentReport", "Report")
+
+             </li>
+           </ul>
+        </li>*@
+
+                 @*   }*@
+                    
+                           
+               </ul>
+                       
+                     </div>
+            <!-- /#left -->
+            <div id="content" class="bg-container">
+
+                @*<div>*@
+
+                @RenderSection("featured", required: false)
+                @RenderBody()
+                @*</div>*@
+
+                <!-- /#content body -->
+                <!--outer -->
+                <!-- /.outer -->
+            </div>
+            <!-- /#content -->
+
+
+        </div>
+
+        <!--wrapper-->
+        <div id="right">
+            <div class="right_content">
+                <div class="alert alert-success white_txt">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>
+                        Welcome 
+                        <br />
+                    </strong>
+                    Set Your Skin Here. Checkout Admin Statistics. Good Day!.
+                </div>
+                <div class="well well-small dark">
+                    <div class="xs_skin_hide hidden-sm-up toggle-right"> <i class="fa fa-cog"></i></div>
+                    <h4 class="brown_txt">
+                        <span class="fa-stack fa-sm">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-paint-brush fa-stack-1x fa-inverse"></i>
+                        </span>
+                        Skins
+                    </h4>
+                    <br />
+
+                    <div class="skinmulti_btn" onclick="javascript:loadjscssfile('blue_black_skin.html','css')">
+                        <div class="skin_blue skin_size"></div>
+                        <div class="skin_black skin_size"></div>
+                    </div>
+                    <div class="skinmulti_btn" onclick="javascript:loadjscssfile('green_black_skin.html','css')">
+                        <div class="skin_green skin_size"></div>
+                        <div class="skin_black skin_size"></div>
+                    </div>
+                    <div class="skinmulti_btn" onclick="javascript:loadjscssfile('purple_black_skin.html','css')">
+                        <div class="skin_purple skin_size"></div>
+                        <div class="skin_black skin_size"></div>
+                    </div>
+                    <div class="skinmulti_btn" onclick="javascript:loadjscssfile('orange_black_skin.html','css')">
+                        <div class="skin_orange skin_size"></div>
+                        <div class="skin_black skin_size"></div>
+                    </div>
+                    <div class="skinmulti_btn" onclick="javascript:loadjscssfile('red_black_skin.html','css')">
+                        <div class="skin_red skin_size"></div>
+                        <div class="skin_black skin_size"></div>
+                    </div>
+                    <div class="skinmulti_btn" onclick="javascript:loadjscssfile('mint_black_skin.html','css')">
+                        <div class="skin_mint skin_size"></div>
+                        <div class="skin_black skin_size"></div>
+                    </div>
+                    <div class="skinmulti_btn" onclick="javascript:loadjscssfile('brown_black_skin.html','css')">
+                        <div class="skin_brown skin_size"></div>
+                        <div class="skin_black skin_size"></div>
+                    </div>
+                    <div class="skinmulti_btn" onclick="javascript:loadjscssfile('black_skin.html','css')">
+                        <div class="skin_black skin_size"></div>
+                        <div class="skin_black skin_size"></div>
+                    </div>
+                    <div class="skin_btn skin_blue" onclick="javascript:loadjscssfile('blue_skin.html','css')"></div>
+                    <div class="skin_btn skin_green" onclick="javascript:loadjscssfile('green_skin.html','css')"></div>
+                    <div class="skin_btn skin_purple" onclick="javascript:loadjscssfile('purple_skin.html','css')"></div>
+                    <div class="skin_btn skin_orange" onclick="javascript:loadjscssfile('orange_skin.html','css')"></div>
+                    <div class="skin_btn skin_red" onclick="javascript:loadjscssfile('red_skin.html','css')"></div>
+                    <div class="skin_btn skin_mint" onclick="javascript:loadjscssfile('mint_skin.html','css')"></div>
+                    <div class="skin_btn skin_brown" onclick="javascript:loadjscssfile('brown_skin.html','css')"></div>
+                    <div class="skin_btn skin_black" onclick="javascript:loadjscssfile('black_skin.html','css')"></div>
+
+                </div>
+                <div class="well well-small dark">
+                    <h4 class="brown_txt margin15_bottom">
+                        <img src="img/admin.jpg" width="32" height="32" class="rounded-circle avatar-img" alt="avatar"> &nbsp;Admin
+                        Statistics
+                    </h4>
+                    <br />
+                    <ul class="list-unstyled">
+                        <li class="green_txt margin15_bottom">
+                            <span class="fa-stack fa-sm">
+                                <i class="fa fa-circle fa-stack-2x text-mint"></i>
+                                <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                            </span>
+                            &nbsp; Last Login
+                            <span class="inlinesparkline float-xs-right">2hrs Back</span>
+                        </li>
+                        <li class="warning_txt margin15_bottom">
+                            <span class="fa-stack fa-sm">
+                                <i class="fa fa-circle fa-stack-2x text-brown"></i>
+                                <i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+                            </span>
+                            &nbsp; Pending Tasks
+                            <span class="dynamicsparkline float-xs-right">12</span>
+                        </li>
+                        <li class="primary_txt margin15_bottom">
+                            <span class="fa-stack fa-sm">
+                                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                                <i class="fa fa-cloud fa-stack-1x fa-inverse"></i>
+                            </span>
+                            &nbsp; Weather Today
+                            <span class="dynamicbar float-xs-right">Rainy</span>
+                        </li>
+                        <li class="margin15_bottom">
+                            <span class="fa-stack fa-sm">
+                                <i class="fa fa-circle fa-stack-2x text-brown"></i>
+                                <i class="fa fa-calendar fa-stack-1x fa-inverse"></i>
+                            </span>
+                            &nbsp; Events
+                            <span class="inlinebar float-xs-right">Team Out</span>
+                        </li>
+                        <li class="success_txt margin15_bottom">
+                            <span class="fa-stack fa-sm">
+                                <i class="fa fa-circle fa-stack-2x text-success"></i>
+                                <i class="fa fa-bell fa-stack-1x fa-inverse"></i>
+                            </span>
+                            &nbsp; Notifications
+                            <span class="inlinebar float-xs-right">5</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="well well-small dark right_progressbar_section">
+                    <h4 class="brown_txt">
+                        <span class="fa-stack fa-sm">
+                            <i class="fa fa-circle fa-stack-2x text-brown"></i>
+                            <i class="fa fa-hand-o-down fa-stack-1x fa-inverse"></i>
+                        </span>
+                        Alerts
+                    </h4>
+                    <br />
+                    <span>Sales Improvement</span>
+                    <span class="float-xs-right">
+                        <small>20%</small>
+                    </span>
+                    <div class="progress xs">
+                        <progress class="progress progress-striped progress-primary" value="20" max="100"></progress>
+                    </div>
+                    <span>Server Load</span>
+                    <span class="float-xs-right">
+                        <small>80%</small>
+                    </span>
+                    <div class="progress xs">
+                        <progress class="progress  progress-striped progress-mint" value="80" max="100"></progress>
+                    </div>
+                    <span>Traffic Improvement</span>
+                    <span class="float-xs-right">
+                        <small>55%</small>
+                    </span>
+                    <div class="progress xs">
+                        <progress class="progress  progress-striped progress-danger" value="55" max="100"></progress>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- # right side -->
+    </div>
+    <!-- /#wrap -->
+    <script>
+
+
+       
+
+
+    </script>
+
+    <script async="" src="https://www.google-analytics.com/analytics.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/components.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/custom.js")"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
+    <!--datatable  scripts-->
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/select2/js/select2.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/datatables/js/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/pluginjs/dataTables.tableTools.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/datatables/js/dataTables.colReorder.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/datatables/js/dataTables.bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/datatables/js/dataTables.buttons.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/datatables/js/dataTables.responsive.min.js")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Content/vendors/datatables/js/dataTables.rowReorder.min.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/datatables/js/buttons.colVis.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/datatables/js/buttons.html5.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/datatables/js/buttons.bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/datatables/js/buttons.print.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/datatables/js/dataTables.scroller.min.js")"></script>
+    <!-- end of datatable scripts -->
+
+   @* <script src="~/Scripts/Custom/ToUpperLetter.js"></script>*@
+       <!--sweet alert  scripts-->
+
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/sweetalert/js/sweetalert2.min.js")"></script>
+
+    <!-- end of -sweet alert scripts -->
+    <!-- form input scripts-->
+    @*<script type="text/javascript" src="@Url.Content("~/Content/vendors/jquery.uniform/js/jquery.uniform.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/inputlimiter/js/jquery.inputlimiter.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/chosen/js/chosen.jquery.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/jquery-tagsinput/js/jquery.tagsinput.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/validval/js/jquery.validVal.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/moment/js/moment.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/daterangepicker/js/daterangepicker.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/datepicker/js/bootstrap-datepicker.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/bootstrap-timepicker/js/bootstrap-timepicker.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/bootstrap-switch/js/bootstrap-switch.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/autosize/js/jquery.autosize.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/inputmask/js/inputmask.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/inputmask/js/jquery.inputmask.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/inputmask/js/inputmask.date.extensions.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/inputmask/js/inputmask.extensions.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/fileinput/js/fileinput.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/fileinput/js/theme.js")"></script>*@
+    <!-- End of  form input scripts end-->
+    <!-- chart scripts -->
+    @*<script type="text/javascript" src="@Url.Content("~/Content/vendors/raphael/js/raphael-min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/d3/js/d3.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/c3/js/c3.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/toastr/js/toastr.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/switchery/js/switchery.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/flotchart/js/jquery.flot.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/flotchart/js/jquery.flot.resize.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/flotchart/js/jquery.flot.stack.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/flotchart/js/jquery.flot.time.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/flotspline/js/jquery.flot.spline.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/flotchart/js/jquery.flot.categories.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/flotchart/js/jquery.flot.pie.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/flot.tooltip/js/jquery.flot.tooltip.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/jquery_newsTicker/js/newsTicker.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Content/vendors/countUp.js/js/countUp.min.js")"></script>*@
+
+    <!--end of chart scripts-->
+    <!-- per page scripts -->
+    @*<script type="text/javascript" src="@Url.Content("~/Content/js/pages/new_dashboard.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Content/js/pages/sweet_alerts.js")"></script>
+    <!--end of per page scripts-->
+
+</body>
+
+<!-- Mirrored from dev.lorvent.com/admire/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Dec 2016 12:42:46 GMT -->
+</html>

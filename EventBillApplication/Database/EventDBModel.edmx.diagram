@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d550b0a7c9a54d529a6995ac9125b409" Name="Diagram1">
+        <EntityTypeShape EntityType="EventDBModel.UserMaster" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="EventDBModel.UserTypeMaster" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="EventDBModel.FK_UserMaster_UserTypeMaster" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EventDBModel.EventMaster" Width="1.5" PointX="0.38611567224660681" PointY="14.432925454542472" />
+        <EntityTypeShape EntityType="EventDBModel.EventCustomer" Width="1.5" PointX="11.237098015489568" PointY="5.7782912132229152" />
+        <AssociationConnector Association="EventDBModel.FK_EventCustomer_UserMaster" />
+        <EntityTypeShape EntityType="EventDBModel.EventEntryMaster" Width="1.5" PointX="7.9056822731651746" PointY="28.370531825521276" />
+        <AssociationConnector Association="EventDBModel.FK_EventEntryMaster_EventEntryMaster" />
+        <EntityTypeShape EntityType="EventDBModel.BillSettlementmaster" Width="1.5" PointX="0.15737915605184583" PointY="31.473457678907298" />
+        <EntityTypeShape EntityType="EventDBModel.CreditAmountDetail" Width="1.5" PointX="11.198283349721825" PointY="28.810709236567238" />
+        <AssociationConnector Association="EventDBModel.FK_CreditAmountDetail_CreditAmountDetail" />
+        <AssociationConnector Association="EventDBModel.FK_CreditAmountDetail_UserMaster" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

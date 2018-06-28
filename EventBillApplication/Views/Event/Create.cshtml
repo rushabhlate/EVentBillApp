@@ -1,0 +1,89 @@
+﻿@model EventBillApplication.Models.EventEntity
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutEvent.cshtml";
+}
+
+<header class="head">
+    <div class="main-bar row">
+        <div class="col-sm-5 col-lg-6 skin_txt">
+            <h4 class="nav_top_align">
+                <i class="fa fa-pencil"></i>
+                New Event
+            </h4>
+        </div>
+        <div class="col-sm-7 col-lg-6">
+            <ol class="breadcrumb float-xs-right nav_breadcrumb_top_align">
+                <li class="breadcrumb-item">
+                    <a href="index.html">
+                        <i class="fa fa-home" data-pack="default" data-tags=""></i> Dashboard
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#">Event</a>
+                </li>
+                <li class="active breadcrumb-item">New Event</li>
+            </ol>
+        </div>
+    </div>
+</header>
+<div class="outer">
+    <div class="inner bg-container forms">
+        <div class="row">
+
+            <div class="col-xl-12">
+                <div class="card m-t-10">
+                    <div class="card-header bg-white">
+                        Event
+                    </div>
+                    <div class="card-block">
+                       @using (Html.BeginForm("Create", "Event", null, FormMethod.Post, new { @class = "form-horizontal form-simple" }))
+                       {
+                           @Html.ValidationSummary(true)
+                       
+                            <fieldset>
+                                <div class="form-group row m-t-10">
+                                    <div class="col-lg-3 col-xl-2 text-lg-right">
+                                        <label for="name4" class=" form-control-label">Event Name *</label>
+                                    </div>
+                                    <div class="col-lg-8 col-xl-4">
+                                        <div class="input-group">
+
+
+                                            @Html.TextBox("Eventname", "", new { @class = "form-control", @placeholder = "" })
+                                            @Html.ValidationMessage("Eventname", new { @class = "text-danger" })
+                                         </div>
+                                    </div>
+                                    
+                                </div>
+                                
+
+                                
+
+                               
+
+                                    <div class="form-group row">
+                                        <div class="col-lg-9 push-xl-2 push-lg-3">
+
+                                            <input type="submit" class="btn btn-primary layout_btn_prevent"  value="Save" />
+                                            <input type="button" class="btn btn-warning layout_btn_prevent" onclick="location.href='@Url.Action("Index", "Event")'" value="Cancel" />
+
+                                        </div>
+                                    </div>
+                </fieldset>
+                       }
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@*<script src="~/Scripts/Custom/AvoidDuplicate.js"></script>*@
+<script>
+   
+
+</script>

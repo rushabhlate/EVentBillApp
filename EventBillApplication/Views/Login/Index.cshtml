@@ -1,0 +1,150 @@
+﻿@model EventBillApplication.Models.LoginEntity
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from dev.lorvent.com/admire/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Dec 2016 12:43:06 GMT -->
+<head>
+    <title>Login | </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/logo1.ico" />
+    <!--Global styles -->
+    <link type="text/css" rel="stylesheet" href="~/Content/css/components.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/css/custom.css" />
+    <!--End of Global styles -->
+    <!--Plugin styles-->
+    <link type="text/css" rel="stylesheet" href="~/Content/vendors/bootstrapvalidator/css/bootstrapValidator.min.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/vendors/wow/css/animate.css" />
+    <!--End of Plugin styles-->
+    <link type="text/css" rel="stylesheet" href="~/Content/css/pages/login.css" />
+</head>
+<body>
+    <div class="preloader" style=" position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100000;
+  backface-visibility: hidden;
+  background: #ffffff;">
+        <div class="preloader_img" style="width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 48%;
+  top: 48%;
+  background-position: center;
+z-index: 999999">
+            <img src="img/loader.gif" style=" width: 40px;" alt="loading...">
+        </div>
+    </div>
+    <div class="container wow fadeInDown" data-wow-delay="0.5s" data-wow-duration="2s">
+        <div class="row">
+            <div class="col-lg-8 push-lg-2 col-md-10 push-md-1 col-sm-10 push-sm-1 login_top_bottom">
+                <div class="row">
+                    <div class="col-lg-8 push-lg-2 col-md-10 push-md-1 col-sm-12">
+                        <div class="login_logo login_border_radius1">
+                            <h3 class="text-xs-center">
+                                <img src="~/Content/img/logow.png" alt="josh logo" class="admire_logo"><span class="text-white">
+                                    ADMIRE &nbsp;<br />
+                                    Log In
+                                </span>
+                            </h3>
+                        </div>
+                        <div class="bg-white login_content login_border_radius">
+                            @if (TempData["Message"] != null)
+                            {
+                                <div class="alert alert-@TempData["MessageClass"]">
+                                    <strong>Warning!</strong> @TempData["Message"].ToString().
+                                </div>
+                            }
+                            @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @class = "form-horizontal form-simple login_validator",id="login_validator1" }))
+                                    {
+                               
+                                <div class="form-group">
+                                    <label for="email" class="form-control-label">Username</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon input_email">
+                                            <i class="fa fa-envelope text-primary"></i>
+                                        </span>
+                                        @Html.TextBox("UserName","", new { @class = "form-control form-control-lg input-lg", @placeholder = "Username" })
+                                        @*<input type="text" class="form-control  form-control-md" id="email" name="username" placeholder="Username">*@
+                                    </div>
+                                </div>
+                                <!--</h3>-->
+                                <div class="form-group">
+                                    <label for="password" class="form-control-label">Password</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon addon_password">
+                                            <i class="fa fa-lock text-primary"></i>
+                                        </span>
+                                        @Html.Password("Password","" ,new { @class = "form-control form-control-lg input-lg", type = "password", placeholder = "Enter Password" })
+                                        @*<input type="password" class="form-control form-control-md" id="password" name="password" placeholder="Password">*@
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <input type="submit" value="Log In" class="btn btn-primary btn-block login_button">
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <label class="custom-control custom-checkbox">
+                                            @*@Html.CheckBoxFor(model => model.RememberMe)*@
+                                            <input type="checkbox" class="custom-control-input form-control">
+                                            <span class="custom-control-indicator"></span>
+                                            @*<a class="custom-control-description">Keep me logged in</a>*@
+                                        </label>
+                                    </div>
+                                  @*  <div class="col-xs-6 text-xs-right forgot_pwd">
+                                        <a href="@Url.Action("resetpassword","Login")" class="custom-control-description forgottxt_clr">Forgot password?</a>
+                                    </div>*@
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @*<label class="form-control-label">Back To HOME </label>*@
+                                <a href="@Url.Action("Index","Public")" class="form-control-label"><b>Back To HOME</b></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- global js -->
+    <script type="text/javascript" src="@Url.Content("~/Content/js/jquery.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/tether.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
+    <!--        <!-- end of global js-->
+    <!--Plugin js-->
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/bootstrapvalidator/js/bootstrapValidator.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/vendors/wow/js/wow.min.js")"></script>
+    <!--End of plugin js-->
+    <script type="text/javascript" src="@Url.Content("~/Content/js/pages/login.js")"></script>
+</body>
+
+
+<!-- Mirrored from dev.lorvent.com/admire/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 16 Dec 2016 12:43:06 GMT -->
+</html>
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        if (document.referrer != 'http://localhost:5584/') {
+            history.pushState(null, null, 'login');
+            window.addEventListener('popstate', function () {
+                history.pushState(null, null, 'login');
+            });
+        }
+    });
+
+
+</script>

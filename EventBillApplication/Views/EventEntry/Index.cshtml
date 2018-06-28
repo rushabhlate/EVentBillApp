@@ -1,0 +1,151 @@
+﻿@model List<EventBillApplication.Models.EventEntryEntity>
+@using EventBillApplication.Helper
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutEvent.cshtml";
+}
+
+<header class="head">
+    <div class="main-bar row">
+        <div class="col-lg-6 col-md-4 col-sm-4">
+            <h4 class="nav_top_align">
+                <i class="fa fa-th"></i>
+                Event Entry detail
+            </h4>
+        </div>
+        <div class="col-lg-6 col-md-8 col-sm-8">
+            <ol class="breadcrumb float-xs-right nav_breadcrumb_top_align">
+                <li class="breadcrumb-item">
+                    <a href="index.html">
+                        <i class="fa fa-home" data-pack="default" data-tags=""></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#"></a>
+                </li>
+                <li class="breadcrumb-item active">  Event Entry detail</li>
+            </ol>
+        </div>
+    </div>
+</header>
+
+<div class="outer">
+    <div class="inner bg-light lter bg-container">
+        <div class="row">
+            <div class="col-xs-12 data_tables">
+                <!-- BEGIN EXAMPLE1 TABLE PORTLET-->
+                <div class="card">
+                    <div class="card-header bg-white">
+                        <i class="fa fa-table"></i> Event Entry Details
+                    </div>
+                    <div class="card-block p-t-25">
+                        <button id="del_button" class="btn btn-primary" onclick="location.href='@Url.Action("Create", "EventEntry")'"> Add EventEntry</button>
+                        <div class="">
+                            <div class="pull-sm-right">
+                                <div class="tools pull-sm-right"></div>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover" id="sample_1">
+                            <thead>
+                                <tr>
+                                     <th>Event name</th>
+                                    <th>Event date</th>
+                                    <th>Event Amount</th>
+                                    <th>Action</th>
+                                    <th>Credit Statement</th>
+                                    <th>Credit Entry</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                               @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.EventMaster.Eventname</td>
+                                        <td>@item.Eventdate</td>
+                                         <td>@item.TotalAmount</td>
+                                        <td>
+                                            <a class="edit" data-toggle="tooltip" data-placement="top" title="" href="@Url.Action("Edit", "EventEntry", new {id=item.Id })" data-original-title="Edit"><i class="fa fa-pencil text-warning"></i></a>&nbsp; &nbsp;
+                                            <a class="delete hidden-xs hidden-sm" data-toggle="tooltip" data-placement="top" title="" id="@item.Id" href="#" data-original-title="Delete" onclick="delete_(this.id)">
+                                                <i class="fa fa-trash text-danger">
+                                                </i>
+                                            </a>
+
+                                        </td>
+                                        <td>
+                                   <button id="del_button" class="btn btn-primary" onclick="location.href='@Url.Action("CreditstatementReport", "EventEntry", new {id=@item.Id,userid=@Helper.CurrentLoggedUser.Id })'">View Credit details</button>
+                                        </td>
+                                        <td>
+                                   <button id="del_button" class="btn btn-primary" onclick="location.href='@Url.Action("InsertCreditAmountentry", "EventEntry", new {id=@item.Id })'">Credit Amount Entry</button>
+                                        </td>
+                                    </tr>
+                                   
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Content/js/pages/datatable.js"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/js/pages/sweet_alerts.js")"></script>
+<script>
+
+    function delete_(id)
+    {
+
+        var _id = id;
+        var param = { 'id': _id };
+
+            swal({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to revert this!',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#00c0ef',
+                cancelButtonColor: '#ff8080',
+                confirmButtonText: 'Yes, delete it!'
+            }).then(function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Delete", "EventEntry")',
+                    data: JSON.stringify(param),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (result) {
+
+                        if (result == true) {
+                           
+
+                            window.location.reload();
+                        }
+
+                    },
+                    failure: function (response) {
+                        alert(response.d);
+                    }
+                });
+            });
+            return false;
+    }
+
+
+    var initTable1 = function () {
+        var table = $('#sample_1');
+        
+        table.DataTable({
+            dom: 'Bflr<"table-responsive"t>ip',
+            buttons: [
+                'copy', 'csv', 'print'
+            ]
+        });
+        var tableWrapper = $('#sample_1_wrapper'); // datatable creates the table wrapper by adding with id {your_table_id}_wrapper
+        tableWrapper.find('.dataTables_length select').select2(); // initialize select2 dropdown
+    }
+</script>

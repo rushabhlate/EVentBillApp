@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EventDBModelStoreContainer" CdmEntityContainer="EventDBEntities">
+    <EntitySetMapping Name="UserMasters">
+      <EntityTypeMapping TypeName="EventDBModel.UserMaster">
+        <MappingFragment StoreEntitySet="UserMaster">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="Updateddate" ColumnName="Updateddate" />
+          <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+          <ScalarProperty Name="Usertypeid" ColumnName="Usertypeid" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypeMasters">
+      <EntityTypeMapping TypeName="EventDBModel.UserTypeMaster">
+        <MappingFragment StoreEntitySet="UserTypeMaster">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Usertype" ColumnName="Usertype" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventMasters">
+      <EntityTypeMapping TypeName="EventDBModel.EventMaster">
+        <MappingFragment StoreEntitySet="EventMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Updatedby" ColumnName="Updatedby" />
+          <ScalarProperty Name="Updatedate" ColumnName="Updatedate" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+          <ScalarProperty Name="Eventname" ColumnName="Eventname" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventCustomers">
+      <EntityTypeMapping TypeName="EventDBModel.EventCustomer">
+        <MappingFragment StoreEntitySet="EventCustomer">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Paidamount" ColumnName="Paidamount" />
+          <ScalarProperty Name="Eventcustomerid" ColumnName="Eventcustomerid" />
+          <ScalarProperty Name="Evententryid" ColumnName="Evententryid" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventEntryMasters">
+      <EntityTypeMapping TypeName="EventDBModel.EventEntryMaster">
+        <MappingFragment StoreEntitySet="EventEntryMaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Createdby" ColumnName="Createdby" />
+          <ScalarProperty Name="Createddate" ColumnName="Createddate" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Eventdate" ColumnName="Eventdate" />
+          <ScalarProperty Name="Eventid" ColumnName="Eventid" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BillSettlementmasters">
+      <EntityTypeMapping TypeName="EventDBModel.BillSettlementmaster">
+        <MappingFragment StoreEntitySet="BillSettlementmaster">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Creditedfrom" ColumnName="Creditedfrom" />
+          <ScalarProperty Name="Paidby" ColumnName="Paidby" />
+          <ScalarProperty Name="Paidamount" ColumnName="Paidamount" />
+          <ScalarProperty Name="Creditamount" ColumnName="Creditamount" />
+          <ScalarProperty Name="Entrydate" ColumnName="Entrydate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CreditAmountDetails">
+      <EntityTypeMapping TypeName="EventDBModel.CreditAmountDetail">
+        <MappingFragment StoreEntitySet="CreditAmountDetail">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="entrydate" ColumnName="entrydate" />
+          <ScalarProperty Name="Creditamount" ColumnName="Creditamount" />
+          <ScalarProperty Name="Creditedto" ColumnName="Creditedto" />
+          <ScalarProperty Name="Creditedfrom" ColumnName="Creditedfrom" />
+          <ScalarProperty Name="evententryid" ColumnName="evententryid" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

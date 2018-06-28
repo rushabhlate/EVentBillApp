@@ -1,0 +1,352 @@
+﻿@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutEvent.cshtml";
+}
+
+<link type="text/css" rel="stylesheet" href="~/Content/vendors/jasny-bootstrap/css/jasny-bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="~/Content/vendors/datepicker/css/bootstrap-datepicker.min.css" />
+<link type="text/css" rel="stylesheet" href="~/Content/vendors/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+<header class="head">
+    <div class="main-bar row">
+        <div class="col-sm-5 col-lg-6 skin_txt">
+            <h4 class="nav_top_align">
+                <i class="fa fa-pencil"></i>
+                New Event Entry
+            </h4>
+        </div>
+        <div class="col-sm-7 col-lg-6">
+            <ol class="breadcrumb float-xs-right nav_breadcrumb_top_align">
+                <li class="breadcrumb-item">
+                    <a href="index.html">
+                        <i class="fa fa-home" data-pack="default" data-tags=""></i> Dashboard
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#">User</a>
+                </li>
+                <li class="active breadcrumb-item"> New Event Entry</li>
+            </ol>
+        </div>
+    </div>
+</header>
+
+<div class="outer">
+    <div class="inner bg-container forms">
+        <div class="row">
+
+            <div class="col-xl-12">
+                <div class="card m-t-10">
+                    <div class="card-header bg-white">
+                        Event Entry
+                    </div>
+                    <div class="card-block">
+                       @using (Html.BeginForm("Create", "EventEntry", null, FormMethod.Post, new { @class = "form-horizontal form-simple" }))
+                       {
+                        @Html.AntiForgeryToken()
+                            <fieldset>
+
+
+
+                                <div class="form-group row m-t-35">
+                                     <div class="col-lg-3 col-xl-2 text-lg-right">
+                                        <label for="name4" class=" form-control-label">Entry date *</label>
+                                    </div>
+                                    <div class="col-lg-8 col-xl-4">
+                                      <div class="input-group">
+                                     <input type="text" class="form-control" placeholder="dd/mm/yyyy" data-date-format="dd/mm/yyyy" id="entrydate" name="entrydate">
+                                      <span class="input-group-addon add-on">
+                                       <i class="fa fa-calendar"></i>
+                                      </span>
+                                      </div>
+                                   
+                                     </div>
+                                 </div>
+
+                                <div class="form-group row m-t-35">
+                                    <div class="col-lg-3 col-xl-2 text-lg-right">
+                                        <label for="name4" class=" form-control-label">Event *</label>
+                                    </div>
+                                    <div class="col-lg-8 col-xl-4">
+                                        <div class="input-group">
+
+
+                                             @Html.DropDownList("eventid", (IEnumerable<SelectListItem>)ViewBag.eventlist,"Select",new { @class = "form-control chzn-select", @data_placeholder = "Select" })
+                                            @Html.ValidationMessage("eventid", new { @class = "text-danger" })
+                                               <span id="eventidmsg" class="text-danger"></span>
+                                         </div>
+                                    </div>
+                                 
+                                </div>
+
+                                <div class="form-group row m-t-35">
+                                     <div class="col-lg-3 col-xl-2 text-lg-right">
+                                        <label for="name4" class=" form-control-label">Customer *</label>
+                                    </div>
+                                    <div class="col-lg-8 col-xl-4">
+                                        <div class="input-group">
+
+
+                                             @Html.DropDownList("Userid", (IEnumerable<SelectListItem>)ViewBag.userlist,"Select", new { @class = "form-control chzn-select", @data_placeholder = "Select" })
+                                            @Html.ValidationMessage("Userid", new { @class = "text-danger" })
+                                            <span id="useridmsg" class="text-danger"></span>
+                                         </div>
+                                    </div>
+
+                                     <div class="col-lg-3 col-xl-2 text-lg-right">
+                                      <button type="button" class="btn btn-primary" onclick="addEventuser()">Add</button>
+                                    </div>
+
+
+                                 </div>
+
+                                  <div class="form-group row m-t-35">
+                                       <div class="col-lg-3 col-xl-2 text-lg-right">
+                                        <label for="name4" class=" form-control-label">Event Customer *</label>
+                                    </div>
+                                      <div class="col-lg-8 col-xl-4">
+                                    <table class="table table-striped table-bordered table-advance table-hover" id="usertable">
+                                        <tr class="titlerow">
+                                           @* <th>Sr No</th>*@
+                                            <th>Name</th>
+                                             <th>Amount</th>
+                                            <th></th>
+                                        </tr>
+                                        <tbody>
+
+
+                                        </tbody>
+
+                                    </table>
+                                          </div>
+                                
+                                 </div>
+
+
+
+
+
+                               <div class="form-group row m-t-35">
+                                       <div class="col-lg-3 col-xl-2 text-lg-right">
+                                        <label for="name4" class=" form-control-label">Location *</label>
+                                    </div>
+                                    <div class="col-lg-8 col-xl-4">
+                                        <div class="input-group">
+
+
+                                            @Html.TextBox("Location", "", new { @class = "form-control", @placeholder = "" })
+                                            @Html.ValidationMessage("Location", new { @class = "text-danger" })
+                                         </div>
+                                    </div>
+                                
+                                        </div>
+
+                                 <div class="form-group row m-t-35">
+                                       <div class="col-lg-3 col-xl-2 text-lg-right">
+                                        <label for="name4" class=" form-control-label">Total Amount</label>
+                                    </div>
+                                    <div class="col-lg-8 col-xl-4">
+                                        <div class="input-group">
+
+                                           
+                                          @Html.TextBox("TotalAmount","", new { @class = "form-control", @placeholder = "" })
+                                            @Html.ValidationMessage("TotalAmount", new { @class = "text-danger" })
+                                             <span id="TotalAmountmsg" class="text-danger"></span>
+                                         </div>
+                                    </div>
+                                
+                                     </div>
+
+                                  @*<div class="form-group row m-t-35">
+                                       <div class="col-lg-3 col-xl-2 text-lg-right">
+                                        <label for="name4" class=" form-control-label">Remark </label>
+                                    </div>
+                                    <div class="col-lg-8 col-xl-4">
+                                        <div class="input-group">
+
+
+                                            @Html.TextBox("Remark", "", new { @class = "form-control", @placeholder = "" })
+                                            @Html.ValidationMessage("Remark", new { @class = "text-danger" })
+                                         </div>
+                                    </div>
+                                
+                                        </div>*@
+
+                                    <div class="form-group row">
+                                        <div class="col-lg-9 push-xl-2 push-lg-3">
+
+                                            <input type="submit" class="btn btn-primary layout_btn_prevent" onclick="return isvalidate()" value="Save" />
+                                            <input type="button" class="btn btn-warning layout_btn_prevent" onclick="location.href='@Url.Action("Index", "User")'" value="Cancel" />
+
+                                        </div>
+                                    </div>
+                                <input type="hidden" name="rowstr" id="rowstr"/>
+                </fieldset>
+                       }
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/vendors/datepicker/js/bootstrap-datepicker.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/vendors/datetimepicker/js/DateTimePicker.min.js")"></script>
+<script>
+    $('#entrydate').datepicker({
+        todayHighlight: true,
+        autoclose: true
+    });
+
+    function validitem()
+    {
+        var valid = true;
+
+        var userid = $("#Userid").val();
+       
+
+
+        $('#usertable tr').each(function () {
+
+            if ($(this).find('.validitemcatrow').val() == userid) {
+                valid=false;
+            }
+        });
+
+        return valid;
+    }
+
+    function addEventuser()
+    {
+        var user = document.getElementById("Userid");
+        var selecteduser=user.options[user.selectedIndex].text;
+        var selecteduserid=$("#Userid").val();;
+        
+        var uservalid=validitem();
+        if(uservalid)
+        {
+            $('#useridmsg').html("");
+            var div="<tr><td> "+selecteduser+"<input type='hidden' value='"+selecteduserid+"' class='row validitemcatrow'/></td><<td><input type=text class='form-control row amountrow'/></td><td><button type='button' id='btnDelete' class='deleterow btn btn btn-danger btn-xs'>Remove</button></td></tr>";
+            $('#usertable').append(div);
+        }
+        else{
+            $('#useridmsg').html("selected user already added");
+        }
+
+    }
+
+    $(document).on("click", ".deleterow", function () {
+     
+        $(this).closest("tr").remove(); // 
+      
+       
+
+    });
+    function userpaidamt()
+    {
+        var totalamt=0;
+        $(this).find('.amountrow').each(function (i) {
+            var amt;
+            if($(this).val()=="")
+                amt=0;
+            else
+                amt=$(this).val();
+
+            totalamt=totalamt+parseFloat(amt);
+        });
+        return totalamt;
+    }
+
+    function isvalidate()
+    {
+
+        var isvalid=true;
+
+        var userid=$('#Userid').val();
+        var event=$('#eventid').val();
+        var totalamt=$('#TotalAmount').val();
+
+        //if(userid=="")
+        //{
+        //    $('#useridmsg').html("select user");
+        //}
+        //else{
+        //    $('#useridmsg').html("");
+        //}
+        if(event=="")
+        {
+            isvalid=false;
+            $('#eventidmsg').html("select event");
+        }
+        else{
+            $('#eventidmsg').html("");
+
+        }
+        if(totalamt=="" || totalamt=="0")
+        {
+            isvalid=false;
+            $('#TotalAmountmsg').html("Enter valid amount");
+        }
+        else{
+            $('#TotalAmountmsg').html("");
+            //var totalpaid=userpaidamt();
+            //if(parseFloat(totalamt)!=parseFloat(totalpaid))
+            //{
+            //    isvalid=false;
+            //    $('#TotalAmountmsg').html("the sum of all customer paidamount is not equal to Total amount");
+            //}
+            //else{
+            //    $('#TotalAmountmsg').html("");
+            //}
+
+        }
+
+
+
+        // var rawitemstr = "";
+        if(isvalid==true)
+        {
+            var str="";
+            var $dataRows = $("#usertable tr:not('.titlerow')");
+            var rowlenght = $dataRows.length;
+            var rowcount = 0;
+            $dataRows.each(function () {
+                count = 0;
+                rowcount++;
+                $(this).find('.row').each(function (i) {
+                    var itemlist = ($(this).val());  //here get td value
+                    count++;
+
+                    if (itemlist != undefined) {
+
+                        if (count == 2) {
+                            str += itemlist;
+                        }
+                        else {
+                            str += itemlist + "~";
+                        }
+                    }
+
+                });
+
+                if (rowcount == rowlenght) {
+
+                }
+                else {
+                    str += "#";
+                }
+
+            });
+
+            //alert(str);
+            $('#rowstr').val(str);
+        }
+
+
+
+
+        return isvalid;
+    }
+
+
+</script>
